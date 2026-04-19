@@ -192,13 +192,7 @@ def rank_emotions(detected: list[str]) -> list[str]:
     return [e for e, _ in counts.most_common()]
 
 
-# ── CNN Model ────────────────────────────────────────────────────────────────
-@st.cache_resource(show_spinner="Loading emotion recognition model …")
-def load_model():
-    return load_model(str(BASE_DIR / "model.h5"))
-
-
-model = load_model()
+model = DummyModel()
 
 # ── Haar Cascade ─────────────────────────────────────────────────────────────
 @st.cache_resource(show_spinner=False)
