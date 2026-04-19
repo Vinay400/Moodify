@@ -21,8 +21,7 @@ import plotly.graph_objects as go
 from collections import Counter
 from pathlib import Path
 from urllib.parse import quote_plus
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, Dropout, Flatten, Conv2D, MaxPooling2D
+from keras.models import load_model
 
 # ── Page Config (must be the very first Streamlit command) ───────────────────
 st.set_page_config(
@@ -190,23 +189,7 @@ def rank_emotions(detected: list[str]) -> list[str]:
 # ── CNN Model ────────────────────────────────────────────────────────────────
 @st.cache_resource(show_spinner="Loading emotion recognition model …")
 def load_model():
-    """Build the FER CNN and load pre-trained weights."""
-    m = Sequential([
-        Conv2D(32, (3, 3), activation="relu", input_shape=(48, 48, 1)),
-        Conv2D(64, (3, 3), activation="relu"),
-        MaxPooling2D(pool_size=(2, 2)),
-        Conv2D(128, (3, 3), activation="relu"),
-        MaxPooling2D(pool_size=(2, 2)),
-        Conv2D(128, (3, 3), activation="relu"),
-        MaxPooling2D(pool_size=(2, 2)),
-        Dropout(0.25),
-        Flatten(),
-        Dense(1024, activation="relu"),
-        Dropout(0.5),
-        Dense(7, activation="softmax"),
-    ])
-    m.load_weights(str(BASE_DIR / "model.h5"))
-    return m
+    return load_model(str(BASE_DIR / "model.h5"))
 
 
 model = load_model()
