@@ -2,7 +2,6 @@ streamlit
 numpy
 pandas
 opencv-python-headless
-tensorflow
 keras
 pillow
 scikit-learn
