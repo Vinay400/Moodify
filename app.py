@@ -21,7 +21,13 @@ import plotly.graph_objects as go
 from collections import Counter
 from pathlib import Path
 from urllib.parse import quote_plus
-from keras.models import load_model
+import numpy as np
+
+class DummyModel:
+    def predict(self, x, verbose=0):
+        # return random probabilities (7 emotions)
+        preds = np.random.rand(7)
+        return np.array([preds / preds.sum()])
 
 # ── Page Config (must be the very first Streamlit command) ───────────────────
 st.set_page_config(
