@@ -2,8 +2,9 @@ streamlit
 numpy
 pandas
 opencv-python-headless
-tensorflow==2.12.0
 pillow
 scikit-learn
 plotly
 requests
+keras
+h5py
